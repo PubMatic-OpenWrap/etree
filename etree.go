@@ -894,13 +894,14 @@ func (c *CharData) setParent(parent *Element) {
 
 // writeTo serializes the character data entity to the writer.
 func (c *CharData) writeTo(w *bufio.Writer, s *WriteSettings) {
-	var r *strings.Replacer
+	/*var r *strings.Replacer
 	if s.CanonicalText {
 		r = xmlReplacerCanonicalText
 	} else {
 		r = xmlReplacerNormal
 	}
-	w.WriteString(r.Replace(c.Data))
+	w.WriteString(r.Replace(c.Data))*/
+	w.WriteString("<![CDATA[" + c.Data + "]]>")
 }
 
 // NewComment creates a parentless XML comment.
