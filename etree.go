@@ -901,9 +901,10 @@ func (c *CharData) writeTo(w *bufio.Writer, s *WriteSettings) {
 		r = xmlReplacerNormal
 	}
 	w.WriteString(r.Replace(c.Data))*/
-	c.Data = strings.TrimSpace(c.Data)
-	if c.Data != "" {
-		w.WriteString("<![CDATA[" + c.Data + "]]>")
+	if c.whitespace {
+		w.WriteString(c.Data)
+	} else {
+		w.WriteString("<![CDATA[" + strings.TrimSpace(c.Data) + "]]>")
 	}
 }
 
